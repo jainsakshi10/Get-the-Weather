@@ -3,10 +3,12 @@ const bodyParser= require("body-parser");
 const http= require("http");
 const app= express();
 
+app.set('view engine', 'ejs');
+
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static("public"));
 
 app.get("/", function(req, res){
-    res.sendFile(__dirname+"/styles.css");
     res.sendFile(__dirname+"/index.html");
 });
 
@@ -23,13 +25,14 @@ app.post("/", function(req,res){
     response.on("data", function(data){
       const WeatherData=JSON.parse(data);
       const temp= WeatherData.main.temp;
-      const WeatherDecsription= WeatherData.weather[0].description;
+      const WeatherDescription= WeatherData.weather[0].description;
       const icon= WeatherData.weather[0].icon;
       const imageurl= "http://openweathermap.org/img/wn/"+icon+"@2x.png";
-      res.write("<p>The weather is currently "+ WeatherDecsription+ "</p>");
-      res.write("<h1>The temperature in "+query+" is "+temp+" degrees Celsius </h1>");
-      res.write("<img src=" +imageurl +">");
-      res.send();
+      res.render('list', {temperature:temp, description: WeatherDescription, weathericon: imageurl, city:query});
+      // res.write("<p>The weather is currently "+ WeatherDecsription+ "</p>");
+      // res.write("<h1>The temperature in "+query+" is "+temp+" degrees Celsius </h1>");
+      // res.write("<img src=" +imageurl +">");
+      // res.send();
     })
   })
 })

@@ -1,5 +1,5 @@
 body{
-  background-image:url("images/weatherimg.png");
+  background-image:url("/images/weatherimg.png");
   color:#fff;
   font-family: 'Montserrat', sans-serif;
 }
@@ -11,10 +11,19 @@ body{
 .find{
   color:#fff;
   font-weight: 600;
-  /* background-color: #fff; */
-  margin: 5% 35% 60% 35%;
+  background-color: #ffffff00;
+  margin: auto;
   padding:5rem 0.5rem;
   text-align:center;
   line-height: 1.5rem;
   font-size: 1.5rem;
+}
+
+.city{
+  margin-right: 3%;
+}
+
+.weather{
+  text-align: center;
+  margin-top: 5%;
 }
